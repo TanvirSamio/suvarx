@@ -32,7 +32,7 @@ const menuItems = [
     { name: 'Home FAQ', path: '/admin/faqs', icon: HelpCircle },
     { name: 'Orders', path: '/admin/orders', icon: ShoppingCart },
     { name: 'Customers', path: '/admin/customers', icon: Users },
-    { name: 'Banners & Sliders', path: '/admin/banners', icon: Image },
+
     { name: 'Coupons & Promo', path: '/admin/coupons', icon: Tag },
     { name: 'Reviews Moderation', path: '/admin/reviews', icon: MessageSquare },
     { name: 'Store Settings', path: '/admin/settings', icon: Settings },
@@ -75,57 +75,87 @@ export const AdminLayout = () => {
 
     if (!isAdmin) {
         return (
-            <div className="min-h-screen bg-[#0A0A0C] flex items-center justify-center p-4">
-                <div className="bg-[#111116] p-8 rounded-3xl shadow-2xl max-w-md w-full border border-white/10 text-white animate-fade-in">
-                    <div className="text-center mb-8">
-                        <div className="w-16 h-16 rounded-2xl bg-white text-black font-extrabold text-2xl flex items-center justify-center mx-auto mb-4 shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-                            M3S
-                        </div>
-                        <h1 className="text-2xl font-extrabold">Admin CMS Portal</h1>
-                        <p className="text-xs text-zinc-400 mt-2 uppercase tracking-wider font-mono">Restricted Access</p>
-                    </div>
+            <div className="min-h-screen relative flex items-center justify-center p-4 bg-[#050505] overflow-hidden">
+                {/* Dynamic Background */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-900/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-900/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay pointer-events-none"></div>
+                </div>
 
-                    {loginError && (
-                        <div className="mb-6 p-3 bg-red-500/10 text-red-500 text-sm font-bold rounded-xl border border-red-500/20 text-center">
-                            {loginError}
+                <div className="relative z-10 w-full max-w-md">
+                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 p-10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] animate-fade-in transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04]">
+                        
+                        <div className="text-center mb-10">
+                            <div className="inline-block relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-indigo-500 rounded-full blur opacity-40"></div>
+                                <div className="relative w-20 h-20 rounded-2xl bg-[#0a0a0a] border border-white/20 text-white font-extrabold text-2xl flex items-center justify-center mx-auto mb-5 shadow-2xl transition-transform hover:scale-105 duration-300">
+                                    SVX
+                                </div>
+                            </div>
+                            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                                SUVARX ADMIN
+                            </h1>
+                            <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-[0.2em] font-mono">
+                                Command Center Access
+                            </p>
                         </div>
-                    )}
 
-                    <form onSubmit={handleAdminLogin} className="space-y-4">
-                        <div>
-                            <label className="block text-xs font-mono text-zinc-400 mb-1.5 uppercase">Admin Email</label>
-                            <input 
-                                type="email" 
-                                required
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-colors text-sm placeholder:text-zinc-600" 
-                                placeholder="admin@m3s.com"
-                            />
+                        {loginError && (
+                            <div className="mb-6 p-4 bg-red-500/10 text-red-400 text-xs font-bold rounded-xl border border-red-500/20 text-center flex items-center justify-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"></span>
+                                {loginError}
+                            </div>
+                        )}
+
+                        <form onSubmit={handleAdminLogin} className="space-y-5">
+                            <div className="space-y-1.5">
+                                <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest pl-1">Authorized Email</label>
+                                <input 
+                                    type="email" 
+                                    required
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
+                                    className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-2xl focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all duration-300 text-sm text-white placeholder:text-slate-600 shadow-inner" 
+                                    placeholder="admin@suvarx.com"
+                                />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest pl-1">Security Key</label>
+                                <input 
+                                    type="password" 
+                                    required
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-2xl focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all duration-300 text-sm text-white placeholder:text-slate-600 shadow-inner" 
+                                    placeholder="••••••••"
+                                />
+                            </div>
+                            
+                            <button 
+                                type="submit" 
+                                disabled={isLoggingIn}
+                                className="w-full py-4 mt-6 relative overflow-hidden group rounded-2xl disabled:opacity-50 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
+                            >
+                                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-slate-100 to-white transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-200"></div>
+                                <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-red-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <span className="relative z-10 text-black font-extrabold uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                                    {isLoggingIn ? (
+                                        <>
+                                            <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></span>
+                                            Authenticating
+                                        </>
+                                    ) : 'Initiate Override'}
+                                </span>
+                            </button>
+                        </form>
+
+                        <div className="mt-8 pt-6 border-t border-white/5 text-center">
+                            <Link to="/" className="inline-flex items-center gap-2 text-[10px] font-mono text-slate-500 hover:text-slate-300 transition-colors uppercase tracking-widest group">
+                                <span className="transform group-hover:-translate-x-1 transition-transform duration-300">&larr;</span> 
+                                Return to Storefront
+                            </Link>
                         </div>
-                        <div>
-                            <label className="block text-xs font-mono text-zinc-400 mb-1.5 uppercase">Password</label>
-                            <input 
-                                type="password" 
-                                required
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-colors text-sm placeholder:text-zinc-600" 
-                                placeholder="••••••••"
-                            />
-                        </div>
-                        <button 
-                            type="submit" 
-                            disabled={isLoggingIn}
-                            className="w-full py-3 mt-4 bg-white text-black font-extrabold uppercase tracking-wider text-xs rounded-xl hover:bg-zinc-200 transition-colors disabled:opacity-50"
-                        >
-                            {isLoggingIn ? 'Authenticating...' : 'Secure Login'}
-                        </button>
-                    </form>
-                    <div className="mt-8 text-center border-t border-white/10 pt-6">
-                        <Link to="/" className="text-xs font-bold text-zinc-500 hover:text-white transition-colors">
-                            &larr; Return to Storefront
-                        </Link>
                     </div>
                 </div>
             </div>
