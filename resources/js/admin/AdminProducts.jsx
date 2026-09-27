@@ -508,7 +508,6 @@ export const AdminProducts = () => {
                                 { id: 'basic', label: 'Basic Info' },
                                 { id: 'media', label: 'Media & 3D' },
                                 { id: 'theme', label: 'Theme & Aesthetics' },
-                                { id: 'specs', label: 'Editorial Specs' },
                                 { id: 'seo', label: 'SEO' },
                                 { id: 'advanced', label: 'Settings' },
                             ].map((tab) => (
@@ -946,35 +945,6 @@ export const AdminProducts = () => {
                             )}
 
                             {/* EDITORIAL FASHION SPECIFICATIONS */}
-                            {activeTab === 'specs' && (
-                                <div className="space-y-5 animate-fade-in">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-700 mb-1">Fabric</label>
-                                            <input type="text" value={formData.fabric} onChange={(e) => setFormData({ ...formData, fabric: e.target.value })} placeholder="e.g. 100% French Terry Cotton" className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-700 mb-1">Weight (GSM)</label>
-                                            <input type="text" value={formData.gsm} onChange={(e) => setFormData({ ...formData, gsm: e.target.value })} placeholder="e.g. 240 GSM" className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-700 mb-1">Fit</label>
-                                            <input type="text" value={formData.fit} onChange={(e) => setFormData({ ...formData, fit: e.target.value })} placeholder="e.g. Boxy Oversized Fit" className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-700 mb-1">Neck</label>
-                                            <input type="text" value={formData.neck} onChange={(e) => setFormData({ ...formData, neck: e.target.value })} placeholder="e.g. High Ribbed Crewneck" className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-slate-700 mb-1">Care Instructions</label>
-                                        <textarea value={formData.care_instructions} onChange={(e) => setFormData({ ...formData, care_instructions: e.target.value })} placeholder="e.g. Machine wash cold, do not tumble dry..." rows="3" className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors"></textarea>
-                                    </div>
-                                </div>
-                            )}
-
                             {/* SEO & METADATA */}
                             {activeTab === 'seo' && (
                                 <div className="space-y-5 animate-fade-in">
